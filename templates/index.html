@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block navlink1 %}<a class="nav-link active" href="{{ url_for('index') }}">Home</a>{% endblock %}
+{% block navlink2 %}<a class="nav-link" href="#">test</a>{% endblock %}
+{% block navlink3 %}<a class="nav-link" href="#">test</a>{% endblock %}
+{% block navlink4 %}<a class="nav-link" href="#">test</a>{% endblock %}
+{% block navlink5 %}<a class="nav-link" href="#">test</a>{% endblock %}
+{% block navlink6 %}<a class="nav-link" href="#">test</a>{% endblock %}
+{% block navlink7 %}<a class="nav-link" href="#">test</a>{% endblock %}
+{% block navlink8 %}<a class="getstarted" href="#">Sign Up</a>{% endblock %}
+
+{% block page_content %}
+
+<!-- ======= Homepage content ======= -->
+<section id="hero">
+	<div class="hero-container" data-aos="fade-up" data-aos-delay="150">
+		<h1>Plan. Launch. Grow.</h1>
+		<h2>We are team of talented designers making websites with Bootstrap</h2>
+		<div class="d-flex">
+			<a href="#about" class="btn-get-started scrollto">Get Started</a>
+			<a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+		</div>
+	</div>
+</section><!-- End of Homepage content -->
+
+{% endblock %}

@@ -123,12 +123,47 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Header
+# Header for the HomePage
+--------------------------------------------------------------*/
+/*
+#headerHome {
+  transition: all 0.5s;
+  z-index: 997;
+  padding: 20px 0;
+}
+
+#headerHome.headerHome-scrolled,
+#headerHome.headerHome-inner-pages {
+  background: rgba(21, 34, 43, 0.85);
+  padding: 10px 0;
+}
+
+#headerHome .logo {
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+#headerHome .logo a {
+  color: #fff; The Dewi logo is white
+}
+
+#headerHome .logo img {
+  max-height: 40px;
+}
+*/
+
+/*--------------------------------------------------------------
+# Header for all pages (this is subject to change if we give the index html's header tag the above 'headerHome' class instead of the 'header' class below)
 --------------------------------------------------------------*/
 #header {
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
+  background-color: #15222b;/*This makes the background color of the header (which contains the navbar) the same color as the footer- a darksih blue*/
 }
 
 #header.header-scrolled,
@@ -147,7 +182,7 @@ h6 {
 }
 
 #header .logo a {
-  color: #fff;
+  color: #fff;/*The *Dewi* logo, #fff is white*/
 }
 
 #header .logo img {
@@ -191,7 +226,8 @@ h6 {
   font-size: 14px;
   text-transform: uppercase;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.9);/*rgba is the color white which is for the text of the links on the navbar
+  (except for the home, register, and logo button)*/
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -227,7 +263,7 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #fff;
+  color: #fff;/*home button text color, is white*/
 }
 
 .navbar .getstarted,
@@ -235,19 +271,19 @@ h6 {
   padding: 8px 25px;
   margin-left: 30px;
   border-radius: 4px;
-  color: #fff;
-  border: 2px solid #fff;
+  color: #fff;/*#fff white (this is for the register button)*/
+  border: 2px solid #fff /*#fff white for register button border colors*/;
 }
 
 .navbar .getstarted:hover,
 .navbar .getstarted:focus:hover {
   color: #fff;
-  background: #fd3800;
-  border-color: #ff4a17;
+  background: #fd3800;/*orange red when hovering for register button*/
+  border-color: #ff4a17;/*also orange red for register button on hover*/
 }
 
 .navbar>ul>li>.getstarted:before {
-  visibility: hidden;
+  visibility: hidden; 
 }
 
 .navbar .dropdown ul {
@@ -424,7 +460,7 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Hero Section
+# Hero Section (Homepage html)
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
@@ -535,7 +571,7 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Sections General
+# Sections General (for all page html sections)
 --------------------------------------------------------------*/
 section {
   padding: 60px 0;
@@ -1359,7 +1395,7 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Contact
+# Contact (Register html)
 --------------------------------------------------------------*/
 .contact .info-box {
   color: #444444;
@@ -1469,6 +1505,18 @@ section {
 .contact .php-email-form button[type=submit]:hover {
   background: #ff5e31;
 }
+
+/*START: code for register html's register form*/
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+font-size: 1rem;
+line-height: 2.15;
+padding-left: .75em;
+padding-right: .75em;
+}
+.card-registration .select-arrow {
+top: 13px;
+}
+/*END: code for register html's register form*/
 
 @-webkit-keyframes animate-loading {
   0% {

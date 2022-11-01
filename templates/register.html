@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register- GameParty{% endblock %}
 
 {% block bodyheader %}
 <header id="header" class="margin-top"><!--a margin top, because fixed top overlaps the header2 "Register" in the block bodysection-->
   <div class="container d-flex align-items-center justify-content-between">
-    <h1 class="logo"><a href="{{ url_for('index') }}">Dewi</a></h1>
+    <h1 class="logo"><a href="{{ url_for('index') }}">GameParty</a></h1>
     <!-- Uncomment below if you prefer to use an image logo -->
     <!-- <a href="index.html" class="logo"><img src="static/img/logo.png" alt="" class="img-fluid"></a>-->
     <nav id="navbar" class="navbar">
@@ -25,6 +25,8 @@
 </header>
 {% endblock %}
 
+{% import "bootstrap/wtf.html" as wtf %}
+
 {% block bodysection %}
 <!-- ======= Register Section (Contact section on template) ======= -->
 <section id="contact" class="contact">
@@ -38,81 +40,14 @@
 				<div class="card card-registration my-4">
 					<div class="row g-0">
 						<div class="col-xl-6 d-none d-xl-block">
-							<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"alt="Sample photo" class="img-fluid" style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+							<!--A photo needs to be 1280x1920 or bigger to make it a good fit for the register page. Even so, some photos that meet the size requirements may still not be good fits- it just depends.-->
+							<img src="https://lh3.googleusercontent.com/1ZGM7rI2B38PeQ_Oib7CWuTfH20R2BriC9LxIv639XkfzpNtcjdzm3p37jLam6pL0MCLyx_5gIVptl9owlXoe21ol3dnAJVmUFYPaEHR2OS9tyQrZahrQfxgTe-b4qRkJB-zGCmm=w2400"alt="Sample photo" class="img-fluid" style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
 						</div>
 						<div class="col-xl-6">
 							<div class="card-body p-md-5 text-black">
 								<h3 class="mb-5 text-uppercase">Registration form</h3>
-								<div class="row">
-									<div class="col-md-6 mb-4">
-										<div class="form-outline">
-											<input type="text" id="form3Example1m" class="form-control form-control-lg" />
-											<label class="form-label" for="form3Example1m">First name</label>
-										</div>
-									</div>
-									<div class="col-md-6 mb-4">
-										<div class="form-outline">
-											<input type="text" id="form3Example1n" class="form-control form-control-lg" />
-											<label class="form-label" for="form3Example1n">Last name</label>
-										</div>
-									</div>
-								</div>
-								<div class="form-outline mb-4">
-									<input type="text" id="form3Example8" class="form-control form-control-lg" />
-									<label class="form-label" for="form3Example8">Address</label>
-								</div>
-								<div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
-									<h6 class="mb-0 me-4">Gender: </h6>
-									<div class="form-check form-check-inline mb-0 me-4">
-										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"value="option1" />
-										<label class="form-check-label" for="femaleGender">Female</label>
-									</div>
-									<div class="form-check form-check-inline mb-0 me-4">
-										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"value="option2" />
-										<label class="form-check-label" for="maleGender">Male</label>
-									</div>
-									<div class="form-check form-check-inline mb-0">
-										<input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"value="option3" />
-										<label class="form-check-label" for="otherGender">Other</label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 mb-4">
-										<select class="select">
-											<option value="1">State</option>
-											<option value="2">Option 1</option>
-											<option value="3">Option 2</option>
-											<option value="4">Option 3</option>
-										</select>
-									</div>
-									<div class="col-md-6 mb-4">
-										<select class="select">
-											<option value="1">City</option>
-											<option value="2">Option 1</option>
-											<option value="3">Option 2</option>
-											<option value="4">Option 3</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-outline mb-4">
-									<input type="text" id="form3Example9" class="form-control form-control-lg" />
-									<label class="form-label" for="form3Example9">DOB</label>
-								</div>
-								<div class="form-outline mb-4">
-									<input type="text" id="form3Example90" class="form-control form-control-lg" />
-									<label class="form-label" for="form3Example90">Pincode</label>
-								</div>
-								<div class="form-outline mb-4">
-									<input type="text" id="form3Example99" class="form-control form-control-lg" />
-									<label class="form-label" for="form3Example99">Course</label>
-								</div>
-								<div class="form-outline mb-4">
-									<input type="text" id="form3Example97" class="form-control form-control-lg" />
-									<label class="form-label" for="form3Example97">Email ID</label>
-								</div>
-								<div class="d-flex justify-content-end pt-3">
-									<button type="button" style="background-color: #15222b; color: white;" class="btn btn-primary btn-lg">Reset all</button>
-									<button type="button" style="background-color: orangered; color: white;" class="btn btn-primary btn-lg ms-2">Submit form</button><!--btn-lg ms-2-->
+								<div>
+									{{ wtf.quick_form(form) }}
 								</div>
 							</div>
 						</div>

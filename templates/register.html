@@ -13,11 +13,11 @@
         <li><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
         <li><a class="nav-link" href="#">test</a></li>
         <li><a class="nav-link" href="#">test</a></li>
-        <li><a class="nav-link" href="#">test</a></li>
-        <li><a class="nav-link" href="#">test</a></li>
-        <li><a class="nav-link" href="#">test</a></li>
-        <li><a class="nav-link" href="#">test</a></li>
-        <li><a class="getstarted" href="#">Login</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a class="getstarted" href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+        <li><a class="getstarted" href="{{ url_for('login') }}">Login</a></li>
+        {% endif %}
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->
@@ -28,7 +28,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block bodysection %}
-<!-- ======= Register Section (Contact section on template) ======= -->
+<!-- ======= Register Section (Contact Section on template) ======= -->
 <section id="contact" class="contact">
 	<div class="container" data-aos="fade-up">
 		<div class=" section-title">
@@ -40,12 +40,12 @@
 				<div class="card card-registration my-4">
 					<div class="row g-0">
 						<div class="col-xl-6 d-none d-xl-block">
-							<!--A photo needs to be 1280x1920 or bigger to make it a good fit for the register page. Even so, some photos that meet the size requirements may still not be good fits- it just depends.-->
-							<img src="https://lh3.googleusercontent.com/1ZGM7rI2B38PeQ_Oib7CWuTfH20R2BriC9LxIv639XkfzpNtcjdzm3p37jLam6pL0MCLyx_5gIVptl9owlXoe21ol3dnAJVmUFYPaEHR2OS9tyQrZahrQfxgTe-b4qRkJB-zGCmm=w2400"alt="Sample photo" class="img-fluid" style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+							<!--A photo needs to be 1280x1920 or bigger (preferably "Tall" photos) to make it a good fit for the register page. Even so, some photos that meet the size requirements may still not be good fits- it just depends.-->
+							<img src="https://lh3.googleusercontent.com/2UZ-vU7l22vDDYT-YkLrmk2ajqOEq1rCnrB2cpEGyqNwuV2WmEp39H2qjcmsUiQ-ynBkKHq5jMqmRPEpIcupWj6DwHzCmsB4t8_OcoXjNGZZIW1Fi2NK_JEYC13Q3zrdRg1D-cJS=w2400"alt="Sample photo" class="img-fluid" style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
 						</div>
 						<div class="col-xl-6">
 							<div class="card-body p-md-5 text-black">
-								<h3 class="mb-5 text-uppercase">Registration form</h3>
+								<h3 class="mb-5 text-uppercase">Registration Form</h3>
 								<div>
 									{{ wtf.quick_form(form) }}
 								</div>
@@ -57,5 +57,5 @@
 		</div>
 	</div>
 </section>
-<!-- End Contact Section -->
+<!-- End Register Section-->
 {% endblock %}

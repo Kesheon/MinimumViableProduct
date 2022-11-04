@@ -1,11 +1,9 @@
-#UPDATE FLASK REQUIREMENTS BEFORE COMMITING MAIN.PY to GITHUB,
-#I DON'T THINK ANYTHING HAS CHANGED, BUT JUST BEING CAUTIOUS
 
 import os
 from flask import Flask, url_for, render_template, redirect, session
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user#
+from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, ValidationError, SelectField
 from wtforms.validators import InputRequired, Email
@@ -59,7 +57,31 @@ class registerForm(FlaskForm):
     username = StringField('Username:', validators=[InputRequired()])
     password = PasswordField('Password:', validators=[InputRequired()])
     city = StringField('City:', validators=[InputRequired()])
-    state = SelectField('Select State:', choices=[('Alabama'),('Louisiana')])
+    state = SelectField('Select State:', choices=[('Alabama'),('Alaska'),
+                                                  ('Arizona'),('Arkansas'),
+                                                  ('California'),('Colorado'),
+                                                  ('Connecticut'), ('Delaware'),
+                                                  ('Florida'), ('Georgia'),
+                                                  ('Hawaii'), ('Idaho'),
+                                                  ('Illinois'), ('Indiana'),
+                                                  ('Iowa'), ('Kansas'),
+                                                  ('Kentucky'), ('Louisiana'),
+                                                  ('Maine'), ('Maryland'),
+                                                  ('Massachusetts'),('Michigan'),
+                                                  ('Minnesota'), ('Mississippi'),
+                                                  ('Missouri'), ('Montana'),
+                                                  ('Nebraska'), ('Nevada'),
+                                                  ('New Hampshire'), ('New Jersey'),
+                                                  ('New Mexico'), ('New York'),
+                                                  ('North Carolina'), ('North Dakota'),
+                                                  ('Ohio'), ('Oklahoma'),
+                                                  ('Oregon'), ('Pennsylvania'),
+                                                  ('Rhode Island'), ('South Carolina'),
+                                                  ('South Dakota'), ('Tennessee'),
+                                                  ('Texas'), ('Utah'),
+                                                  ('Vermont'), ('Virginia'),
+                                                  ('Washington'), ('West Virginia'),
+                                                  ('Wisconsin'), ('Wyoming')])
     isPersonalProfile = BooleanField('Personal Profile', default=False)
     isStore = BooleanField('Store Profile', default=False)
     submit = SubmitField('Submit')
@@ -71,6 +93,39 @@ class registerForm(FlaskForm):
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already in use.')
+
+class loginForm(FlaskForm):
+    username = StringField('Username:', validators=[InputRequired()])
+    password = PasswordField('Password:', validators=[InputRequired()])
+    submit = SubmitField('Login')
+
+    def validate_username(self, field):
+
+        #This is set with a query of the first item that matches the provided username in the User database/model.
+        if User.query.filter_by(username=field.data).first():
+
+            # do nothing/ this username is valid because it has already been registered
+            print('something')# had to print something here, otherwise this error persists: "IndentationError: expected an indented block after 'if' statement on line ###"
+
+        #After a query, if there is no first item that matches the provided username in the User database/model,
+        #then that means the provided username has not been registered, so raise an error
+        else:
+            raise ValidationError('That username does not exist. If you have yet to register, then please do so to login.')
+
+#LoginManager
+#------------
+#Configure the login manager so that it knows how to identify a user.
+#It is important to provide a user loader callback when using Flask-Login.
+#This keeps the current user object loaded in that current session based on the stored id.
+
+login_manager = LoginManager(app)
+
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+            
 
 
 #Views
@@ -102,6 +157,29 @@ def register():
             return redirect(url_for('register'))
         
     return render_template('register.html', form=form)
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+    form = loginForm()
+    if form.validate_on_submit():
+
+        #The userName variable below is set with a query of the first item that matches the provided username in the User database/model
+        userName = User.query.filter_by(username=form.username.data).first()
+
+        #If the provided username exists in the User table and the password associated with that username is verifiable
+        #then log the user in and redirect/refresh to login.html:
+        if userName is not None and userName.verify_password(form.password.data):
+            login_user(userName)
+            return redirect(url_for('login'))
+    return render_template('login.html', form=form)
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    #logout the current user
+    logout_user()
+    return redirect(url_for('login'))
+        
 
 
 if __name__ == "__main__":

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Login- GameParty{% endblock %}
+
+{% block bodyheader %}
+<header id="header" class="margin-top"><!--a margin top, because fixed top overlaps the header2 "Register" in the block bodysection-->
+  <div class="container d-flex align-items-center justify-content-between">
+    <h1 class="logo"><a href="{{ url_for('index') }}">GameParty</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="static/img/logo.png" alt="" class="img-fluid"></a>-->
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+        <li><a class="nav-link" href="#">test</a></li>
+        <li><a class="nav-link" href="#">test</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a class="getstarted" href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+        <li><a class="getstarted" href="{{ url_for('register') }}">Register</a></li>
+        {% endif %}
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+  </div>
+</header>
+{% endblock %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block bodysection %}
+<!-- ======= Login Section (Contact Section on template) ======= -->
+<section id="contact" class="contact">
+	<div class="container" data-aos="fade-up">
+		<div class=" section-title">
+			<h2>Login</h2>
+			<p>Welcome Back!</p>
+		</div>
+		<div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col">
+				<div class="card card-registration my-4">
+					<div class="row g-0">
+						<div class="col-xl-6 d-none d-xl-block">
+							<!--A photo needs to be 1280x1920 or bigger to make it a good fit for the register page. Even so, some photos that meet the size requirements may still not be good fits- it just depends.-->
+							<img src="https://lh3.googleusercontent.com/1ZGM7rI2B38PeQ_Oib7CWuTfH20R2BriC9LxIv639XkfzpNtcjdzm3p37jLam6pL0MCLyx_5gIVptl9owlXoe21ol3dnAJVmUFYPaEHR2OS9tyQrZahrQfxgTe-b4qRkJB-zGCmm=w2400"alt="Sample photo" class="img-fluid" style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+						</div>
+						<div class="col-xl-6">
+							<div class="card-body p-md-5 text-black">
+								<h3 class="mb-5 text-uppercase">Login form</h3>
+								<div>
+									{{ wtf.quick_form(form) }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Login Section-->
+{% endblock %}

@@ -125,7 +125,7 @@ h6 {
 /*--------------------------------------------------------------
 # Header for the HomePage
 --------------------------------------------------------------*/
-/*
+
 #headerHome {
   transition: all 0.5s;
   z-index: 997;
@@ -148,16 +148,16 @@ h6 {
 }
 
 #headerHome .logo a {
-  color: #fff; The Dewi logo is white
+  color: #fff; /*The Dewi logo is white*/
 }
 
 #headerHome .logo img {
   max-height: 40px;
 }
-*/
+
 
 /*--------------------------------------------------------------
-# Header for all pages (this is subject to change if we give the index html's header tag the above 'headerHome' class instead of the 'header' class below)
+# Header for all pages (except homepage)
 --------------------------------------------------------------*/
 #header {
   transition: all 0.5s;

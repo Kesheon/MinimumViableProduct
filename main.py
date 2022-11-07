@@ -47,6 +47,19 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+class Event(db.Model):
+    __tablename__ ='events'
+    id = db.Column(db.Integer, primary_key=True)
+    storeName = db.Column(db.String)
+    storeAddress = db.Column(db.String)
+    storeCityName = db.Column(db.String(64))
+    storeStateName = db.Column(db.String(64))
+    storeManagerFullName = db.Column(db.String)
+    storePhoneNumber = db.Column(db.String(24))
+    games = db.Column(db.String)
+    time = db.Column(db.String)
+    
+
 #Forms
 #-----
 
@@ -103,14 +116,51 @@ class loginForm(FlaskForm):
 
         #This is set with a query of the first item that matches the provided username in the User database/model.
         if User.query.filter_by(username=field.data).first():
-
             # do nothing/ this username is valid because it has already been registered
-            print('something')# had to print something here, otherwise this error persists: "IndentationError: expected an indented block after 'if' statement on line ###"
+
+            # had to print something here, otherwise this error persists: "IndentationError: expected an indented block after 'if' statement on line ###"
+            print('something')
 
         #After a query, if there is no first item that matches the provided username in the User database/model,
         #then that means the provided username has not been registered, so raise an error
         else:
             raise ValidationError('That username does not exist. If you have yet to register, then please do so to login.')
+        
+class hostEventForm(FlaskForm):
+    storeName = StringField('Store name:', validators=[InputRequired()])
+    storeAddress = StringField('Store address:', validators=[InputRequired()])
+    storeCityName = StringField("Store's city:", validators=[InputRequired()])
+    storeStateName = SelectField("Store's state:", choices=[('Alabama'),('Alaska'),
+                                                  ('Arizona'),('Arkansas'),
+                                                  ('California'),('Colorado'),
+                                                  ('Connecticut'), ('Delaware'),
+                                                  ('Florida'), ('Georgia'),
+                                                  ('Hawaii'), ('Idaho'),
+                                                  ('Illinois'), ('Indiana'),
+                                                  ('Iowa'), ('Kansas'),
+                                                  ('Kentucky'), ('Louisiana'),
+                                                  ('Maine'), ('Maryland'),
+                                                  ('Massachusetts'),('Michigan'),
+                                                  ('Minnesota'), ('Mississippi'),
+                                                  ('Missouri'), ('Montana'),
+                                                  ('Nebraska'), ('Nevada'),
+                                                  ('New Hampshire'), ('New Jersey'),
+                                                  ('New Mexico'), ('New York'),
+                                                  ('North Carolina'), ('North Dakota'),
+                                                  ('Ohio'), ('Oklahoma'),
+                                                  ('Oregon'), ('Pennsylvania'),
+                                                  ('Rhode Island'), ('South Carolina'),
+                                                  ('South Dakota'), ('Tennessee'),
+                                                  ('Texas'), ('Utah'),
+                                                  ('Vermont'), ('Virginia'),
+                                                  ('Washington'), ('West Virginia'),
+                                                  ('Wisconsin'), ('Wyoming')])
+    storeManagerFullName = StringField('Store manager full name:', validators=[InputRequired()])
+    storePhoneNumber = StringField("Store's phone number:", validators=[InputRequired()])
+    games = StringField('Game(s):', validators=[InputRequired()])
+    time = StringField('Time:', validators=[InputRequired()])
+    submit = SubmitField('Submit')
+    
 
 #LoginManager
 #------------
@@ -139,22 +189,20 @@ def index():
 def register():
     form = registerForm()
     if form.validate_on_submit():
-        test = True
-        if test == True:
-            db.session.add(User(firstName = form.firstName.data, lastName = form.lastName.data, email = form.email.data, username = form.username.data,
-                                password = form.password.data, city = form.city.data, state = form.state.data, isPersonalProfile = form.isPersonalProfile.data,
-                                isStore = form.isStore.data))
-            db.session.commit()
-            form.firstName.data = ''
-            form.lastName.data = ''
-            form.email.data = ''
-            form.username.data = ''
-            form.password.data = ''
-            form.city.data = ''
-            form.state.data = ''
-            form.isPersonalProfile.data = ''
-            form.isStore.data = ''
-            return redirect(url_for('register'))
+        db.session.add(User(firstName = form.firstName.data, lastName = form.lastName.data, email = form.email.data, username = form.username.data,
+                            password = form.password.data, city = form.city.data, state = form.state.data, isPersonalProfile = form.isPersonalProfile.data,
+                            isStore = form.isStore.data))
+        db.session.commit()
+        form.firstName.data = ''
+        form.lastName.data = ''
+        form.email.data = ''
+        form.username.data = ''
+        form.password.data = ''
+        form.city.data = ''
+        form.state.data = ''
+        form.isPersonalProfile.data = ''
+        form.isStore.data = ''
+        return redirect(url_for('register'))
         
     return render_template('register.html', form=form)
 
@@ -179,6 +227,36 @@ def logout():
     #logout the current user
     logout_user()
     return redirect(url_for('login'))
+
+@app.route('/hostEvent', methods=['GET','POST'])
+@login_required
+def hostEvent():
+    form = hostEventForm()
+    if form.validate_on_submit():
+        db.session.add(Event(storeName = form.storeName.data,
+                             storeAddress = form.storeAddress.data,
+                             storeCityName = form.storeCityName.data,
+                             storeStateName = form.storeStateName.data,
+                             storeManagerFullName = form.storeManagerFullName.data,
+                             storePhoneNumber = form.storePhoneNumber.data,
+                             games = form.games.data,
+                             time = form.time.data))
+        db.session.commit()
+        form.storeName.data = ''
+        form.storeAddress.data = ''
+        form.storeCityName.data = ''
+        form.storeStateName.data = ''
+        form.storeManagerFullName.data = ''
+        form.storePhoneNumber.data = ''
+        form.games.data = ''
+        form.time.data = ''
+        return redirect(url_for('hostEvent'))
+    return render_template('hostEvent.html', form=form)
+
+@app.route('/error401', methods=['GET', 'POST'])
+def error401():
+    return render_template('error401.html')
+                             
         
 
 

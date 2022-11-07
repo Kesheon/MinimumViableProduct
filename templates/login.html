@@ -6,13 +6,17 @@
 <header id="header" class="margin-top"><!--a margin top, because fixed top overlaps the header2 "Login" in the block bodysection-->
   <div class="container d-flex align-items-center justify-content-between">
     <h1 class="logo"><a href="{{ url_for('index') }}">GameParty</a></h1>
-    <!-- Uncomment below if you prefer to use an image logo -->
-    <!-- <a href="index.html" class="logo"><img src="static/img/logo.png" alt="" class="img-fluid"></a>-->
     <nav id="navbar" class="navbar">
       <ul>
         <li><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
-        <li><a class="nav-link" href="#">test</a></li>
-        <li><a class="nav-link" href="#">test</a></li>
+        {% if current_user.isStore %}
+        <li><a class="nav-link" href="{{ url_for('hostEvent') }}">Host An Event</a></li>
+        {% else %}
+        {% endif %}
+        {% if current_user.isPersonalProfile %}
+        <li><a class="nav-link" href="#">Join An Event</a></li>
+        {% else %}
+        {% endif %}
         {% if current_user.is_authenticated %}
         <li><a class="getstarted" href="{{ url_for('logout') }}">Logout</a></li>
         {% else %}
@@ -33,7 +37,7 @@
 	<div class="container" data-aos="fade-up">
 		<div class=" section-title">
 			<h2>Login</h2>
-			<p>Welcome Back!</p>
+			<p>Everyone's waiting on you!</p>
 		</div>
 		<div class="row d-flex justify-content-center align-items-center h-100">
 			<div class="col">

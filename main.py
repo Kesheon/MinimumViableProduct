@@ -48,15 +48,17 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
 class Event(db.Model):
-    __tablename__ ='events'
+    __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
     storeName = db.Column(db.String)
     storeAddress = db.Column(db.String)
     storeCityName = db.Column(db.String(64))
     storeStateName = db.Column(db.String(64))
+    storeZipCode = db.Column(db.String(10))
     storeManagerFullName = db.Column(db.String)
     storePhoneNumber = db.Column(db.String(24))
     games = db.Column(db.String)
+    date = db.Column(db.String)
     time = db.Column(db.String)
     
 
@@ -155,9 +157,11 @@ class hostEventForm(FlaskForm):
                                                   ('Vermont'), ('Virginia'),
                                                   ('Washington'), ('West Virginia'),
                                                   ('Wisconsin'), ('Wyoming')])
+    storeZipCode = StringField('Store zip code:', validators=[InputRequired()])
     storeManagerFullName = StringField('Store manager full name:', validators=[InputRequired()])
     storePhoneNumber = StringField("Store's phone number:", validators=[InputRequired()])
     games = StringField('Game(s):', validators=[InputRequired()])
+    date = StringField('Date:', validators=[InputRequired()])
     time = StringField('Time:', validators=[InputRequired()])
     submit = SubmitField('Submit')
     
@@ -183,7 +187,6 @@ def load_user(user_id):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -252,6 +255,12 @@ def hostEvent():
         form.time.data = ''
         return redirect(url_for('hostEvent'))
     return render_template('hostEvent.html', form=form)
+
+@app.route('/joinEvent', methods=['GET', 'POST'])
+@login_required
+def joinEvent():
+    eventsTable = Event.query.all()
+    return render_template('joinEvent.html', eventsTable=eventsTable)
 
 @app.route('/error401', methods=['GET', 'POST'])
 def error401():

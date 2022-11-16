@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Join An Event- GameParty{% endblock %}
+
+{% block bodyheader %}
+<header id="header" class="margin-top"><!--a margin top, because fixed top overlaps the header2 "Join An Event" in the block bodysection-->
+  <div class="container d-flex align-items-center justify-content-between">
+    <h1 class="logo"><a href="{{ url_for('index') }}">GameParty</a></h1>
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+        <li><a class="nav-link active" href="{{ url_for('joinEvent') }}">Join An Event</a></li>
+        <li><a class="getstarted" href="{{ url_for('logout') }}">Logout</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+  </div>
+</header>
+{% endblock %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block bodysection %}
+<!-- ======= Host Event Section (Contact Section on template) ======= -->
+
+{% if current_user.isPersonalProfile %}
+
+<section id="contact" class="contact">
+	<div class="container" data-aos="fade-up">
+		<div class=" section-title">
+			<h2>Join An Event</h2>
+			<p>Invitations For Everyone!</p>
+		</div>
+	</div>
+	{% for events in eventsTable %}
+	<div class="row">
+
+        <div class="col-lg-6">
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="info-box">
+                <i class="bx bx-map"></i>
+                <h3>{{ events.storeName }}</h3>
+                <p>{{ events.storeAddress }} , {{ events.storeCityName }} , {{ events.storeStateName }} {{ events.storeZipCode }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-box mt-4">
+                <i class="bx bx-envelope"></i>
+                <h3>Email Us</h3>
+                <p>info@example.com<br>contact@example.com</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-box mt-4">
+                <i class="bx bx-phone-call"></i>
+                <h3>Call Us</h3>
+                <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+              </div>
+            </div>
+        </div>
+
+    </div>
+	{% endfor %}
+</section>
+
+{% else %}
+
+<meta http-equiv="refresh" content="0; url='{{ url_for('error401') }}'"/>
+
+{% endif %}
+{% endblock %}

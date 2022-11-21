@@ -15,7 +15,7 @@
         {% else %}
         {% endif %}
         {% if current_user.isPersonalProfile %}
-        <li><a class="nav-link" href="#">Join An Event</a></li>
+        <li><a class="nav-link" href="{{ url_for('joinEvent') }}">Join An Event</a></li>
         {% else %}
         {% endif %}
         {% if current_user.is_authenticated %}

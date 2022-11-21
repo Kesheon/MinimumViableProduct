@@ -43,22 +43,29 @@
                 <i class="bx bx-map"></i>
                 <h3>{{ events.storeName }}</h3>
                 <p>{{ events.storeAddress }} , {{ events.storeCityName }} , {{ events.storeStateName }} {{ events.storeZipCode }}</p>
+                <p>Games to be played: {{ events.games }}</p>
+                <p>Date: {{ events.date }}</p>
+                <p>Time: {{ events.time }}</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="info-box mt-4">
                 <i class="bx bx-envelope"></i>
                 <h3>Email Us</h3>
-                <p>info@example.com<br>contact@example.com</p>
+                <p>{{ events.storeEmail }}</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="info-box mt-4">
                 <i class="bx bx-phone-call"></i>
                 <h3>Call Us</h3>
-                <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                <p>{{ events.storePhoneNumber }}</p>
               </div>
             </div>
+            {{ wtf.quick_form(form) }}
+            {% for message in messageTable %}
+            <p>User: {{ message.content }}</p>
+            {% endfor %}
         </div>
 
     </div>

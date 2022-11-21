@@ -5,7 +5,7 @@ from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, ValidationError, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, ValidationError, SelectField, IntegerField, TextAreaField
 from wtforms.validators import InputRequired, Email
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -54,13 +54,18 @@ class Event(db.Model):
     storeAddress = db.Column(db.String)
     storeCityName = db.Column(db.String(64))
     storeStateName = db.Column(db.String(64))
-    storeZipCode = db.Column(db.String(10))
+    storeZipCode = db.Column(db.Integer)
     storeManagerFullName = db.Column(db.String)
+    storeEmail = db.Column(db.String(64), unique=True, index=True)
     storePhoneNumber = db.Column(db.String(24))
     games = db.Column(db.String)
     date = db.Column(db.String)
     time = db.Column(db.String)
-    
+
+class Message(db.Model):
+    __tablename__ = 'message'
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text)
 
 #Forms
 #-----
@@ -157,12 +162,17 @@ class hostEventForm(FlaskForm):
                                                   ('Vermont'), ('Virginia'),
                                                   ('Washington'), ('West Virginia'),
                                                   ('Wisconsin'), ('Wyoming')])
-    storeZipCode = StringField('Store zip code:', validators=[InputRequired()])
+    storeZipCode = IntegerField('Store zip code:', validators=[InputRequired()])
     storeManagerFullName = StringField('Store manager full name:', validators=[InputRequired()])
+    storeEmail = StringField('Store email:', validators=[InputRequired(), Email()])
     storePhoneNumber = StringField("Store's phone number:", validators=[InputRequired()])
     games = StringField('Game(s):', validators=[InputRequired()])
     date = StringField('Date:', validators=[InputRequired()])
     time = StringField('Time:', validators=[InputRequired()])
+    submit = SubmitField('Submit')
+
+class joinEventForm(FlaskForm):
+    content = TextAreaField("Tell everyone that you're going to this event!: ")
     submit = SubmitField('Submit')
     
 
@@ -259,15 +269,19 @@ def hostEvent():
 @app.route('/joinEvent', methods=['GET', 'POST'])
 @login_required
 def joinEvent():
+    form = joinEventForm()
+    if form.validate_on_submit():
+        db.session.add(Message(content = form.content.data))
+        db.session.commit()
+        form.content.data=''
+        return redirect(url_for('joinEvent'))
+    messageTable = Message.query.all()
     eventsTable = Event.query.all()
-    return render_template('joinEvent.html', eventsTable=eventsTable)
+    return render_template('joinEvent.html', eventsTable=eventsTable, messageTable=messageTable, form=form)
 
 @app.route('/error401', methods=['GET', 'POST'])
 def error401():
     return render_template('error401.html')
-                             
-        
-
 
 if __name__ == "__main__":
     app.run(debug=True)

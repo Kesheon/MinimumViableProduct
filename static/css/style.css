@@ -145,11 +145,10 @@ h6 {
   line-height: 1;
   font-weight: 700;
   letter-spacing: 2px;
+  color: rgb(43, 255, 0); /*The Dewi logo is white*/
 }
 
-#headerHome .logo a {
-  color: #fff; /*The Dewi logo is white*/
-}
+
 
 #headerHome .logo img {
   max-height: 40px;
@@ -163,7 +162,7 @@ h6 {
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
-  background-color: #15222b;/*This makes the background color of the header (which contains the navbar) the same color as the footer- a darksih blue*/
+  background-color: #000000;/*This makes the background color of the header (which contains the navbar) the same color as the footer- a darksih blue*/
 }
 
 #header.header-scrolled,
@@ -179,10 +178,11 @@ h6 {
   line-height: 1;
   font-weight: 700;
   letter-spacing: 2px;
+  color: rgb(42, 255, 0);/*The *Dewi* logo, #fff is white*/
 }
 
 #header .logo a {
-  color: #fff;/*The *Dewi* logo, #fff is white*/
+  color: rgb(30, 255, 0);/*The *Dewi* logo, #fff is white*/
 }
 
 #header .logo img {
@@ -226,8 +226,7 @@ h6 {
   font-size: 14px;
   text-transform: uppercase;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);/*rgba is the color white which is for the text of the links on the navbar
-  (except for the home, register, and logo button)*/
+  
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -246,7 +245,7 @@ h6 {
   height: 2px;
   bottom: -6px;
   left: 0;
-  background-color: #ff4a17;
+  background-color: #51ff00;
   visibility: hidden;
   width: 0px;
   transition: all 0.3s ease-in-out 0s;
@@ -271,8 +270,9 @@ h6 {
   padding: 8px 25px;
   margin-left: 30px;
   border-radius: 4px;
-  color: #fff;/*#fff white (this is for the register button)*/
-  border: 2px solid #fff /*#fff white for register button border colors*/;
+  color: rgb(43, 255, 0);/*#fff white (this is for the register button)*/
+  border: 2px solid rgb(43, 255, 0) /*#fff white for register button border colors*/;
+  background-color: rgba(255, 166, 0, 0.301);
 }
 
 .navbar .getstarted:hover,
@@ -949,7 +949,7 @@ section {
 
 .features .nav-link.active {
   background: #ff4a17;
-  color: #fff;
+  color: rgb(72, 255, 0);
   border-color: #ff4a17;
 }
 
@@ -1740,4 +1740,194 @@ top: 13px;
 
 #footer .credits a {
   transition: 0.3s;
+}
+
+/*---------------------------------------------
+Gaming Library Style
+--------------------------------------------- 
+*/
+
+.gaming-library {
+  margin-top: 60px;
+  padding: 30px;
+  background-color: #1f2122;
+  border-radius: 23px;
+}
+
+.gaming-library .item {
+  border-bottom: 1px solid #27292a;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.gaming-library .last-item {
+  margin-bottom: 30px;
+}
+
+.profile-library .last-item {
+  border-bottom: none;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.gaming-library .item ul li {
+  margin-top: 15px;
+}
+
+.gaming-library .item ul li img {
+  margin-top: -30px;
+}
+
+.gaming-library .item ul li {
+  display: inline-block;
+  width: 17%;
+}
+
+.gaming-library .item ul li:first-child {
+  width: 110px;
+}
+
+.gaming-library .item ul li:last-child {
+  width: 15%;
+  text-align: right;
+}
+
+.gaming-library .item ul li h4 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.gaming-library .item ul li span {
+  color: #666;
+  font-size: 14px;
+}
+
+.gaming-library .main-button {
+  text-align: center;
+  margin-bottom: -53px;
+}
+
+
+
+
+/*---------------------------------------------
+Profile Style
+--------------------------------------------- 
+*/
+
+.main-profile {
+  border-radius: 23px;
+  padding: 30px;
+  background-color: #1f2122;
+}
+
+.main-profile .main-info span {
+  font-size: 14px;
+  color: #fff;
+  background-color: #e75e8d;
+  padding: 8px 20px;
+  display: inline-block;
+  border-radius: 25px;
+  font-weight: 400;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+}
+
+.main-profile .main-info h4 {
+  margin-bottom: 20px;
+}
+
+.main-profile .main-info .main-border-button {
+  margin-top: 25px;
+}
+
+.main-profile ul {
+  border-radius: 23px;
+  padding: 30px;
+  background-color: #27292a;
+}
+
+.main-profile ul li {
+  width: 100%;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #666;
+}
+
+.main-profile ul li span {
+  float: right;
+  font-weight: 500;
+  color: #ec6090;
+}
+
+.main-profile ul li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.clips {
+  margin-top: 30px;
+  border-top: 2px solid #27292a;
+}
+
+.clips .heading-section {
+  margin-top: 30px;
+}
+
+.clips .item  {
+  border-radius: 23px;
+  padding: 30px 15px;
+  background-color: #27292a;
+  margin-bottom: 30px;
+}
+
+.clips .item .thumb {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.clips .item .thumb a {
+  position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-23px, -23px);
+    width: 46px;
+    height: 46px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 46px;
+    color: #ec6090;
+}
+
+.clips .item h4 {
+  font-size: 15px;
+  display: inline-block;
+}
+
+.clips .item span i {
+  color: #ec6090;
+}
+
+.clips .item span {
+  float: right;
+  color: #fff;
+  font-size: 14px;
+}
+
+.clips .main-button {
+  margin-top: 10px;
+  text-align: center;
+}
+
+body .page-content {
+  margin-top: 110px;
+  background-color: #27292a;
+  padding: 60px;
+  border-radius: 23px;
 }

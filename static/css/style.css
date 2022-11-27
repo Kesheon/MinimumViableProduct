@@ -163,7 +163,7 @@ h6 {
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
-  background-color: #15222b;/*This makes the background color of the header (which contains the navbar) the same color as the footer- a darksih blue*/
+  background-color: #15222b;/*This makes the background color of the header (which contains the navbar) the same color as the .footer-top: a darksih blue*/
 }
 
 #header.header-scrolled,
@@ -1741,3 +1741,9 @@ top: 13px;
 #footer .credits a {
   transition: 0.3s;
 }
+
+/*--------------------------------------------------------------
+# joinEvent.html css for comments
+--------------------------------------------------------------*/
+
+.link-muted { color: #aaa; } .link-muted:hover { color: #1266f1; }

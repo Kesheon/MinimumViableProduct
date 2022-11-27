@@ -250,18 +250,24 @@ def hostEvent():
                              storeAddress = form.storeAddress.data,
                              storeCityName = form.storeCityName.data,
                              storeStateName = form.storeStateName.data,
+                             storeZipCode = form.storeZipCode.data,
                              storeManagerFullName = form.storeManagerFullName.data,
+                             storeEmail = form.storeEmail.data,
                              storePhoneNumber = form.storePhoneNumber.data,
                              games = form.games.data,
+                             date = form.date.data,
                              time = form.time.data))
         db.session.commit()
         form.storeName.data = ''
         form.storeAddress.data = ''
         form.storeCityName.data = ''
         form.storeStateName.data = ''
+        form.storeZipCode.data = ''
         form.storeManagerFullName.data = ''
+        form.storeEmail.data = ''
         form.storePhoneNumber.data = ''
         form.games.data = ''
+        form.date.data = ''
         form.time.data = ''
         return redirect(url_for('hostEvent'))
     return render_template('hostEvent.html', form=form)

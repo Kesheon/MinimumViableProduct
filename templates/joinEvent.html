@@ -34,42 +34,63 @@
 	</div>
 	{% for events in eventsTable %}
 	<div class="row">
-
-        <div class="col-lg-6">
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="info-box">
-                <i class="bx bx-map"></i>
-                <h3>{{ events.storeName }}</h3>
-                <p>{{ events.storeAddress }} , {{ events.storeCityName }} , {{ events.storeStateName }} {{ events.storeZipCode }}</p>
-                <p>Games to be played: {{ events.games }}</p>
-                <p>Date: {{ events.date }}</p>
-                <p>Time: {{ events.time }}</p>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="info-box mt-4">
-                <i class="bx bx-envelope"></i>
-                <h3>Email Us</h3>
-                <p>{{ events.storeEmail }}</p>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="info-box mt-4">
-                <i class="bx bx-phone-call"></i>
-                <h3>Call Us</h3>
-                <p>{{ events.storePhoneNumber }}</p>
-              </div>
-            </div>
-            {{ wtf.quick_form(form) }}
-            {% for message in messageTable %}
-            <p>User: {{ message.content }}</p>
-            {% endfor %}
+    <div class="col-lg-6">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="info-box">
+            <i class="bx bx-map"></i>
+            <h3>{{ events.storeName }}</h3>
+            <p>{{ events.storeAddress }} , {{ events.storeCityName }} , {{ events.storeStateName }} {{ events.storeZipCode }}</p>
+            <p>Games to be played: {{ events.games }}</p>
+            <p>Date: {{ events.date }}</p>
+            <p>Time: {{ events.time }}</p>
+          </div>
         </div>
-
+        <div class="col-md-6">
+          <div class="info-box mt-4">
+            <i class="bx bx-envelope"></i>
+            <h3>Email Us</h3>
+            <p>{{ events.storeEmail }}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box mt-4">
+            <i class="bx bx-phone-call"></i>
+            <h3>Call Us</h3>
+            <p>{{ events.storePhoneNumber }}</p>
+          </div>
+        </div>
+        {{ wtf.quick_form(form) }}
+        <section style="background-color: #121d24;">
+          <h2 style="color:#fff;" class="mb-0">ㅤㅤㅤAttendees:</h2><!--there are 3 copy/pasted invisible characters before "Attendees:"-->
+          {% for message in messageTable %}
+          <div class="container my-5 py-5">
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-12 col-lg-10">
+                <div class="card text-dark">
+                  <div class="card-body p-4">
+                    <div class="d-flex flex-start">
+                      <img class="rounded-circle shadow-1-strong me-3"
+                      src="https://lh3.googleusercontent.com/ujRsrvPObF_N2cQ727EfqqyFcBXGSXcjSFnAJ2fDB4G5E-hucv1pAgCk_6ZQcy7IZRJ1ZOBHitq9uQziiO6R32BEox70Px__Gcfhyl5HQnuBEHkE1OohtbljisSIF7Pop7h4jY1T=w2400" alt="avatar" width="60"
+                      height="60" />
+                      <div>
+                        <h6 class="fw-bold mb-1">User</h6>
+                        <p class="mb-0">
+                          {{ message.content }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </section>
+      </div>
     </div>
-	{% endfor %}
+  </div>
+  {% endfor %}
 </section>
 
 {% else %}

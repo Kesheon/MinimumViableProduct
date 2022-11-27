@@ -145,10 +145,11 @@ h6 {
   line-height: 1;
   font-weight: 700;
   letter-spacing: 2px;
-  color: rgb(43, 255, 0); /*The Dewi logo is white*/
 }
 
-
+#headerHome .logo a {
+  color: #fff; /*The Dewi logo is white*/
+}
 
 #headerHome .logo img {
   max-height: 40px;
@@ -162,11 +163,7 @@ h6 {
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
-<<<<<<< HEAD
   background-color: #15222b;/*This makes the background color of the header (which contains the navbar) the same color as the .footer-top: a darksih blue*/
-=======
-  background-color: #000000;/*This makes the background color of the header (which contains the navbar) the same color as the footer- a darksih blue*/
->>>>>>> d0e08cbe490c1a3d0833928182eb2398cd914d19
 }
 
 #header.header-scrolled,
@@ -182,11 +179,10 @@ h6 {
   line-height: 1;
   font-weight: 700;
   letter-spacing: 2px;
-  color: rgb(42, 255, 0);/*The *Dewi* logo, #fff is white*/
 }
 
 #header .logo a {
-  color: rgb(30, 255, 0);/*The *Dewi* logo, #fff is white*/
+  color: #fff;/*The *Dewi* logo, #fff is white*/
 }
 
 #header .logo img {
@@ -230,7 +226,8 @@ h6 {
   font-size: 14px;
   text-transform: uppercase;
   font-weight: 600;
-  
+  color: rgba(255, 255, 255, 0.9);/*rgba is the color white which is for the text of the links on the navbar
+  (except for the home, register, and logo button)*/
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -249,7 +246,7 @@ h6 {
   height: 2px;
   bottom: -6px;
   left: 0;
-  background-color: #51ff00;
+  background-color: #ff4a17;
   visibility: hidden;
   width: 0px;
   transition: all 0.3s ease-in-out 0s;
@@ -274,9 +271,8 @@ h6 {
   padding: 8px 25px;
   margin-left: 30px;
   border-radius: 4px;
-  color: rgb(43, 255, 0);/*#fff white (this is for the register button)*/
-  border: 2px solid rgb(43, 255, 0) /*#fff white for register button border colors*/;
-  background-color: rgba(255, 166, 0, 0.301);
+  color: #fff;/*#fff white (this is for the register button)*/
+  border: 2px solid #fff /*#fff white for register button border colors*/;
 }
 
 .navbar .getstarted:hover,
@@ -953,7 +949,7 @@ section {
 
 .features .nav-link.active {
   background: #ff4a17;
-  color: rgb(72, 255, 0);
+  color: #fff;
   border-color: #ff4a17;
 }
 
@@ -1746,13 +1742,13 @@ top: 13px;
   transition: 0.3s;
 }
 
-<<<<<<< HEAD
 /*--------------------------------------------------------------
 # joinEvent.html css for comments
 --------------------------------------------------------------*/
 
 .link-muted { color: #aaa; } .link-muted:hover { color: #1266f1; }
-=======
+
+
 /*---------------------------------------------
 Gaming Library Style
 --------------------------------------------- 
@@ -1942,4 +1938,3 @@ body .page-content {
   padding: 60px;
   border-radius: 23px;
 }
->>>>>>> d0e08cbe490c1a3d0833928182eb2398cd914d19

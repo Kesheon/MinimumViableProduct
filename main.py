@@ -35,6 +35,7 @@ class User(UserMixin, db.Model):
     state = db.Column(db.String(64))
     isPersonalProfile = db.Column(db.Boolean, default=False, nullable=False)
     isStore = db.Column(db.Boolean, default=False, nullable=False)
+    
 
     @property
     def password(self):
@@ -105,14 +106,29 @@ class registerForm(FlaskForm):
     isPersonalProfile = BooleanField('Personal Profile', default=False)
     isStore = BooleanField('Store Profile', default=False)
     submit = SubmitField('Submit')
-
-    #These conditionals are set with a query of the first item that matches the
+     #These conditionals are set with a query of the first item that matches the
     #provided username in the User database/model. If anything matches the provided
     #username, then raise a ValidationError, because that username
     #already exists/has been registered already.
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already in use.')
+
+        #Update User information.
+class UpdateForm(FlaskForm): 
+    firstName = StringField('First Name:', validators=[InputRequired()])
+    lastName = StringField('Last Name:', validators=[InputRequired()])
+    email = StringField('Email:', validators=[InputRequired(), Email()])
+    username = StringField('Username:', validators=[InputRequired()])
+    submit = SubmitField('Update')
+    #These conditionals are set with a query of the first item that matches the
+    #provided username in the User database/model. If anything matches the provided
+    #username, then raise a ValidationError, because that username
+    #already exists/has been registered already.
+    def validate_username(self, field):
+        if username.data != current_user.username:
+            if User.query.filter_by(username=field.data).first():
+                raise ValidationError('Username already in use.')
 
 class loginForm(FlaskForm):
     username = StringField('Username:', validators=[InputRequired()])
@@ -215,7 +231,7 @@ def register():
         form.state.data = ''
         form.isPersonalProfile.data = ''
         form.isStore.data = ''
-        return redirect(url_for('register'))
+        return redirect(url_for('login'))
         
     return render_template('register.html', form=form)
 
@@ -231,7 +247,7 @@ def login():
         #then log the user in and redirect/refresh to login.html:
         if userName is not None and userName.verify_password(form.password.data):
             login_user(userName)
-            return redirect(url_for('login'))
+            return redirect(url_for('profile'))
     return render_template('login.html', form=form)
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -289,5 +305,12 @@ def joinEvent():
 def error401():
     return render_template('error401.html')
 
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+     
+    return render_template('profile.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
+
